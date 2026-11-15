@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#efe7dd">
+  <meta name="description" content="Свадебное приглашение Виктории и Егора — 7 августа 2027 года.">
+  <title>Егор & Виктория · 07.08.2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Manrope:wght@300;400;500;600&family=Marck+Script&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f2eae0;
+      --paper-light:#faf6f0;
+      --paper-deep:#e7d9ca;
+      --sand:#cbb29e;
+      --taupe:#a58a76;
+      --cocoa:#805c49;
+      --brown:#5d3c2e;
+      --espresso:#39251e;
+      --ink:#3d2b24;
+      --muted:#8c7668;
+      --gold:#b9976c;
+      --gold-light:#d8c09a;
+      --serif:"Cormorant Garamond", Georgia, serif;
+      --script:"Marck Script", cursive;
+      --sans:"Manrope", Arial, sans-serif;
+      --site-width:520px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:#d8c9bb}
+    body{
+      margin:0;background:#d8c9bb;color:var(--ink);font-family:var(--sans);
+      -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    }
+    body.is-locked{overflow:hidden}
+    button,a{font:inherit}
+    a{color:inherit}
+    .site{
+      width:min(100%,var(--site-width));min-height:100vh;margin:0 auto;overflow:hidden;
+      background:var(--paper);position:relative;box-shadow:0 0 80px rgba(43,27,20,.18);
+    }
+    .grain{position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:.055;mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E")}
+    .ornament{color:var(--gold);font:400 22px/1 var(--serif);letter-spacing:.2em}
+    .eyebrow{font:500 9px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+    .section{position:relative;padding:76px 27px}
+    .section-title{margin:0;color:var(--espresso);font:400 clamp(42px,11vw,58px)/.95 var(--serif);text-align:center}
+    .section-copy{font:300 12px/1.9 var(--sans);color:#725f53;text-align:center}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.72,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+    .thin-rule{width:44px;height:1px;background:var(--gold);margin:22px auto}
+    .frame{border:1px solid rgba(117,82,61,.35);padding:7px;position:relative}
+    .frame:before{content:"";position:absolute;inset:4px;border:1px solid rgba(185,151,108,.35);pointer-events:none}
+    .script{font-family:var(--script);font-weight:400}
+
+    /* Invitation envelope */
+    .cover{
+      position:fixed;inset:0;z-index:2000;display:grid;place-items:center;
+      background:
+        radial-gradient(ellipse at 50% 28%,rgba(216,192,154,.23),transparent 36%),
+        linear-gradient(145deg,#6f5747,#463126 72%,#34231c);
+      transition:opacity .9s ease,visibility .9s ease;
+      padding:24px;
+    }
+    .cover.hide{opacity:0;visibility:hidden;pointer-events:none}
+    .cover-caption{position:absolute;bottom:max(34px,env(safe-area-inset-bottom));left:15px;right:15px;
+      color:rgba(250,242,232,.72);text-align:center;font-size:9px;letter-spacing:.24em;text-transform:uppercase}
+    .envelope{width:min(84vw,390px);aspect-ratio:.72;position:relative;filter:drop-shadow(0 28px 38px rgba(0,0,0,.34));perspective:1100px}
+    .env-back{position:absolute;inset:12% 2% 7%;background:linear-gradient(145deg,#e7d8c7,#cbb49d);border-radius:3px;overflow:hidden}
+    .env-back:before,.env-back:after{content:"";position:absolute;inset:0}
+    .env-back:before{background:linear-gradient(34deg,transparent 49.5%,rgba(105,72,52,.13) 50%) left/50% 100% no-repeat,
+      linear-gradient(-34deg,transparent 49.5%,rgba(105,72,52,.13) 50%) right/50% 100% no-repeat}
+    .letter{position:absolute;left:11%;right:11%;top:17%;height:68%;z-index:2;background:var(--paper-light);
+      display:flex;align-items:center;justify-content:center;text-align:center;color:var(--brown);
+      transform:translateY(8%);opacity:0;visibility:hidden;
+      transition:transform 1s cubic-bezier(.2,.75,.2,1),opacity .45s ease,visibility 0s linear .45s}
+    .letter:before{content:"";position:absolute;inset:12px;border:1px solid rgba(185,151,108,.55)}
+    .letter-mark{font:400 45px/1 var(--script)}
+    .letter-sub{display:block;margin-top:10px;font:400 9px/1.6 var(--sans);letter-spacing:.22em;text-transform:uppercase}
+    .env-flap{position:absolute;left:2%;right:2%;top:12%;height:48%;z-index:5;transform-origin:top;
+      background:linear-gradient(145deg,#ddcbb7,#b89c82);clip-path:polygon(0 0,100% 0,50% 100%);
+      transition:transform .95s cubic-bezier(.2,.75,.2,1)}
+    .env-front{position:absolute;left:2%;right:2%;top:12%;bottom:7%;z-index:4;pointer-events:none;
+      background:linear-gradient(145deg,transparent 49.5%,rgba(111,78,56,.13) 50%) left/50% 100% no-repeat,
+      linear-gradient(-145deg,transparent 49.5%,rgba(111,78,56,.12) 50%) right/50% 100% no-repeat}
+    .wax-button{
+      position:absolute;z-index:8;left:50%;top:49%;transform:translate(-50%,-50%);
+      width:100px;height:100px;border:0;border-radius:50%;cursor:pointer;color:#e3c7a5;
+      background:radial-gradient(circle at 32% 26%,#a97854 0,#8a5539 34%,#603823 75%,#47291d 100%);
+      box-shadow:inset 0 0 0 2px rgba(237,205,167,.28),inset 0 0 18px rgba(32,16,10,.3),0 9px 25px rgba(31,17,11,.3);
+      display:grid;place-items:center;transition:transform .25s ease;
+    }
+    .wax-button:hover{transform:translate(-50%,-50%) scale(1.05)}
+    .wax-button:before{content:"";position:absolute;inset:9px;border:1px solid rgba(232,198,157,.65);border-radius:50%}
+    .wax-button span{font:400 26px/1 var(--serif);letter-spacing:-.06em}
+    .envelope.open .env-flap{transform:rotateX(180deg)}
+    .envelope.open .letter{transform:translateY(-25%);opacity:1;visibility:visible;
+      transition:transform 1s cubic-bezier(.2,.75,.2,1),opacity .45s ease .35s,visibility 0s}
+    .envelope.open .wax-button{opacity:0;transform:translate(-50%,-50%) scale(.7);transition:opacity .35s,transform .5s}
+
+
+    /* Hero */
+    .hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;
+      padding:75px 24px 92px;background:
+      radial-gradient(ellipse at 50% 48%,rgba(255,255,255,.68),transparent 52%),
+      linear-gradient(180deg,#f8f2ea 0%,#eee3d7 100%)}
+    .hero:before{content:"";position:absolute;inset:22px;border:1px solid rgba(141,104,79,.24);pointer-events:none}
+    .hero:after{content:"";position:absolute;inset:29px;border:1px solid rgba(185,151,108,.18);pointer-events:none}
+    .hero-flower{position:absolute;width:180px;height:180px;opacity:.26;pointer-events:none}
+    .hero-flower.left{left:-60px;top:8%;transform:rotate(-24deg)}
+    .hero-flower.right{right:-64px;bottom:8%;transform:rotate(155deg)}
+    .hero-flower svg{width:100%;height:100%}
+    .hero-content{position:relative;z-index:2;max-width:390px}
+    .hero-monogram{font:400 19px/1 var(--serif);letter-spacing:.12em;color:var(--gold);margin-bottom:25px}
+    .hero-kicker{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin-bottom:21px}
+    .hero h1{font:400 clamp(62px,17vw,88px)/.84 var(--script);color:var(--brown);margin:0}
+    .hero-amp{display:block;font:400 32px/1 var(--serif);color:var(--gold);margin:7px 0}
+    .hero-date{margin-top:32px;font:400 29px/1 var(--serif);letter-spacing:.15em;color:var(--espresso)}
+    .hero-copy{max-width:310px;margin:24px auto 0;font:300 11px/2 var(--sans);color:#776457}
+    .hero-bottom{margin-top:46px;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+    .scroll-line{width:1px;height:38px;background:linear-gradient(var(--gold),transparent);margin:12px auto 0;animation:scrollPulse 1.7s ease-in-out infinite}
+    @keyframes scrollPulse{50%{transform:scaleY(.55);transform-origin:top}}
+
+    /* Editorial couple photo */
+    .portrait-section{background:var(--espresso);color:var(--paper-light);padding:82px 30px 90px}
+    .portrait-section .eyebrow{color:var(--gold-light);text-align:center}
+    .portrait-layout{margin:28px auto 0;max-width:390px;display:grid;grid-template-columns:1fr;gap:22px}
+    .portrait-img{width:100%;height:auto;display:block;max-height:520px;object-fit:cover;object-position:center 35%}
+    .portrait-caption{text-align:center;font:400 38px/1.05 var(--script);color:#e4cdb2;margin-top:20px}
+    .portrait-note{max-width:280px;margin:10px auto 0;text-align:center;font:300 10px/1.8 var(--sans);color:#d0bca9}
+
+    /* Calendar */
+    .calendar-section{background:var(--paper);padding-top:84px;padding-bottom:86px}
+    .calendar-section .eyebrow{text-align:center}
+    .month-title{font:400 44px/1 var(--serif);text-align:center;color:var(--espresso);margin:12px 0 0}
+    .calendar-grid{max-width:410px;margin:30px auto 0;display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid rgba(108,75,56,.35);border-left:1px solid rgba(108,75,56,.35)}
+    .calendar-cell{min-height:48px;display:grid;place-items:center;border-right:1px solid rgba(108,75,56,.22);border-bottom:1px solid rgba(108,75,56,.22);
+      font:400 18px/1 var(--serif);color:#6e5749;position:relative}
+    .calendar-cell.weekday{min-height:34px;font:500 8px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:rgba(215,197,178,.18)}
+    .calendar-cell.empty{background:rgba(255,255,255,.18)}
+    .calendar-cell.wedding-day{color:var(--paper-light);font-size:22px;z-index:1}
+    .calendar-cell.wedding-day:before{content:"";position:absolute;width:38px;height:38px;border-radius:50%;background:var(--brown);z-index:-1;box-shadow:0 0 0 4px rgba(185,151,108,.22)}
+    .calendar-heart{font:400 25px/1 var(--serif);text-align:center;color:var(--gold);margin:30px auto 0}
+    .calendar-caption{text-align:center;font:300 10px/1.8 var(--sans);color:var(--muted);margin-top:9px}
+
+    /* Timeline */
+    .timeline-section{background:linear-gradient(180deg,#e9dccf,#f4ece3);padding:72px 0 70px;position:relative;overflow:hidden}
+    .timeline-heading{padding:0 25px;text-align:center;position:relative;z-index:2}
+    .timeline-heading .eyebrow{margin-bottom:12px}
+    .timeline-heading .section-title{font-size:50px}
+    .timeline-intro{max-width:300px;margin:17px auto 0;font:300 11px/1.8 var(--sans);color:#806b5d}
+    .timeline-track{height:1470px;max-width:520px;margin:25px auto 0;position:relative}
+    .timeline-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+    .timeline-path-bg{fill:none;stroke:rgba(116,78,57,.18);stroke-width:1.5}
+    .timeline-path{fill:none;stroke:var(--brown);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+    .moving-heart{position:absolute;width:24px;height:24px;z-index:4;transform:translate(-50%,-50%);filter:drop-shadow(0 3px 5px rgba(70,43,30,.2))}
+    .moving-heart svg{width:100%;height:100%}
+    .event{position:absolute;z-index:3;width:45%;text-align:center}
+    .event .time{font:400 32px/1 var(--serif);color:var(--espresso);margin-top:6px}
+    .event .event-name{font:400 38px/1.05 var(--script);color:var(--brown)}
+    .event .event-desc{font:300 9px/1.7 var(--sans);color:#826d5f;max-width:180px;margin:8px auto 0}
+    .event.one{top:130px;right:2%}
+    .event.two{top:490px;left:2%}
+    .event.three{top:880px;right:2%}
+    .event.four{top:1250px;left:2%}
+    .timeline-detail-photo{position:absolute;top:690px;left:39%;width:95px;height:135px;object-fit:cover;object-position:center;border:5px solid rgba(250,246,240,.85);box-shadow:0 10px 24px rgba(64,39,27,.13);transform:rotate(4deg);z-index:2}
+    .timeline-end{position:absolute;bottom:12px;left:0;right:0;text-align:center;font:400 34px/1 var(--script);color:var(--brown)}
+
+    /* Venue */
+    .venue-section{background:var(--espresso);color:var(--paper-light);padding:84px 22px 88px}
+    .venue-section .eyebrow{color:var(--gold-light);text-align:center}
+    .venue-section .section-title{color:var(--paper-light);font-size:50px}
+    .venue-lead{max-width:300px;margin:17px auto 0;text-align:center;font:300 11px/1.8 var(--sans);color:#d5c4b6}
+    .venue-main{margin:30px auto 0;max-width:440px}
+    .venue-main img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;object-position:center}
+    .venue-secondary{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:440px;margin:12px auto 0}
+    .venue-secondary img{width:100%;height:170px;object-fit:cover;display:block}
+    .venue-caption{margin:22px 0 0;text-align:center;font:400 29px/1.1 var(--serif);color:#f3e7da}
+    .venue-address{margin:9px 0 0;text-align:center;font:300 10px/1.7 var(--sans);color:#c9b5a5}
+    .map-button{display:flex;width:max-content;max-width:100%;margin:24px auto 0;align-items:center;gap:13px;padding:14px 20px;border:1px solid rgba(216,192,154,.72);
+      text-decoration:none;color:#f5eadd;font-size:9px;letter-spacing:.18em;text-transform:uppercase;transition:background .25s,color .25s}
+    .map-button:hover{background:var(--paper);color:var(--espresso)}
+
+    /* Sunset interlude */
+    .sunset-section{height:450px;position:relative;overflow:hidden;background:#5c4233}
+    .sunset-section img{width:100%;height:100%;object-fit:cover;object-position:center 47%;display:block;filter:saturate(.78)}
+    .sunset-section:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,24,17,.08),rgba(40,24,17,.58))}
+    .sunset-quote{position:absolute;z-index:2;left:24px;right:24px;bottom:48px;text-align:center;color:white}
+    .sunset-quote .script{font-size:50px;line-height:1}
+    .sunset-quote p{font:300 9px/1.8 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin:13px 0 0;color:rgba(255,255,255,.84)}
+
+    /* Dress code */
+    .dress-section{background:var(--paper);padding:85px 25px 90px}
+    .dress-section .eyebrow{text-align:center}
+    .dress-section .section-title{font-size:52px}
+    .dress-copy{max-width:320px;margin:17px auto 0;text-align:center;font:300 11px/1.85 var(--sans);color:#786456}
+    .swatches{display:flex;justify-content:center;gap:10px;margin:30px auto 18px;flex-wrap:wrap}
+    .swatch{width:39px;height:39px;border-radius:50%;border:1px solid rgba(70,43,30,.2);box-shadow:0 5px 12px rgba(65,41,29,.09)}
+    .palette-label{text-align:center;font:400 15px/1.5 var(--serif);color:var(--brown)}
+    .dress-note{max-width:300px;margin:23px auto 0;padding:16px 14px;border-top:1px solid rgba(185,151,108,.55);border-bottom:1px solid rgba(185,151,108,.55);
+      text-align:center;font:300 10px/1.9 var(--sans);color:#725b4d}
+    .dress-note strong{font-weight:600;color:var(--brown)}
+
+    /* Wishes */
+    .wishes-section{background:linear-gradient(145deg,#d8c4b2,#e9dcd0);padding:84px 26px 90px}
+    .wishes-card{max-width:420px;margin:0 auto;padding:38px 22px 34px;background:rgba(250,246,240,.72);border:1px solid rgba(113,78,57,.3);outline:1px solid rgba(185,151,108,.26);outline-offset:-7px;text-align:center;position:relative}
+    .wishes-card:before,.wishes-card:after{content:"❦";position:absolute;left:50%;transform:translateX(-50%);font:400 25px/1 var(--serif);color:var(--gold);background:#e5d4c5;padding:0 10px}
+    .wishes-card:before{top:-13px}.wishes-card:after{bottom:-13px;transform:translateX(-50%) rotate(180deg)}
+    .wishes-card .section-title{font-size:46px}
+    .wishes-card p{font:300 11px/2 var(--sans);color:#70594b;margin:20px 0 0}
+    .wishes-card .last-line{font:400 26px/1.2 var(--script);color:var(--brown);margin-top:22px}
+
+    /* Countdown */
+    .countdown-section{background:var(--espresso);color:var(--paper-light);padding:84px 20px 95px;text-align:center}
+    .countdown-section .eyebrow{color:var(--gold-light)}
+    .countdown-section .section-title{color:var(--paper-light);font-size:49px}
+    .countdown-caption{font:300 10px/1.7 var(--sans);color:#d2c0b0;margin:14px 0 0}
+    .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:420px;margin:30px auto 0}
+    .count-box{padding:17px 3px 14px;border:1px solid rgba(216,192,154,.38);background:rgba(255,255,255,.035)}
+    .count-box strong{display:block;font:400 clamp(25px,7vw,37px)/1 var(--serif);color:#f5e9dc;font-variant-numeric:tabular-nums}
+    .count-box span{display:block;margin-top:8px;font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:#cbb6a4}
+    .closing-script{font:400 54px/1 var(--script);color:#e0c49f;margin-top:53px}
+    .closing-names{font:400 22px/1.4 var(--serif);color:#f2e6d9;margin-top:8px}
+    .closing-date{font:300 9px/1.6 var(--sans);letter-spacing:.24em;color:#c9b4a2;margin-top:17px}
+
+    /* Music */
+    .music-button{position:fixed;z-index:1500;right:max(14px,calc((100vw - var(--site-width))/2 + 14px));bottom:max(15px,env(safe-area-inset-bottom));
+      width:48px;height:48px;border-radius:50%;border:1px solid rgba(185,151,108,.62);background:rgba(246,238,229,.9);backdrop-filter:blur(10px);
+      color:var(--brown);display:grid;place-items:center;cursor:pointer;box-shadow:0 7px 22px rgba(41,25,18,.16)}
+    .music-button svg{width:18px;height:18px}
+    .music-button.playing .music-ring{animation:spin 7s linear infinite}
+    .music-ring{position:absolute;inset:4px;border:1px dashed rgba(128,92,73,.5);border-radius:50%}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media(min-width:700px){
+      body{padding:18px 0}
+      .site{border-radius:3px}
+      .cover{padding:30px}
+    }
+    @media(max-width:370px){
+      .section{padding-left:20px;padding-right:20px}
+      .event .event-name{font-size:33px}
+      .event .time{font-size:28px}
+      .timeline-detail-photo{width:78px;height:112px;left:41%}
+      .calendar-cell{min-height:42px}
+      .venue-secondary img{height:135px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body class="is-locked">
+<div class="grain"></div>
+
+<!-- 1. Closed envelope -->
+<div class="cover" id="cover">
+  <div class="envelope" id="envelope">
+    <div class="env-back"></div>
+    <div class="letter"><div><div class="letter-mark">E & V</div><span class="letter-sub">Wedding invitation</span></div></div>
+    <div class="env-flap"></div>
+    <div class="env-front"></div>
+    <button class="wax-button" id="waxButton" aria-label="Открыть конверт"><span>E & V</span></button>
+  </div>
+  <div class="cover-caption">Нажмите на печать, чтобы открыть приглашение</div>
+</div>
+
+
+<main class="site">
+  <button class="music-button" id="musicButton" aria-label="Включить музыку" title="Музыка">
+    <span class="music-ring"></span>
+    <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>
+    </svg>
+  </button>
+  <audio id="weddingAudio" preload="none" loop src="assets/ethereal-live-strings-45s.mp3"></audio>
+
+  <!-- 3. Main title screen — no photo by design -->
+  <section class="hero">
+    <div class="hero-flower left" aria-hidden="true">
+      <svg viewBox="0 0 180 180" fill="none" stroke="#8b654d" stroke-width="1.1">
+        <path d="M18 163C39 113 74 78 132 54M40 126c-2-23 7-42 27-57M73 94c5-28 21-49 49-64M98 68c0-21 11-39 31-50M110 84c24-6 43 1 58 19M126 103c20 7 31 23 34 44"/>
+        <path d="M128 20c13-11 28-7 33 5 5 13-5 29-21 37-10 5-21 6-31 4 0-18 5-36 19-46ZM48 73C32 62 17 69 16 84c-1 16 15 29 34 31 11 1 20-2 28-8-5-15-15-27-30-34Z"/>
+      </svg>
+    </div>
+    <div class="hero-flower right" aria-hidden="true">
+      <svg viewBox="0 0 180 180" fill="none" stroke="#8b654d" stroke-width="1.1">
+        <path d="M18 163C39 113 74 78 132 54M40 126c-2-23 7-42 27-57M73 94c5-28 21-49 49-64M98 68c0-21 11-39 31-50M110 84c24-6 43 1 58 19M126 103c20 7 31 23 34 44"/>
+        <path d="M128 20c13-11 28-7 33 5 5 13-5 29-21 37-10 5-21 6-31 4 0-18 5-36 19-46ZM48 73C32 62 17 69 16 84c-1 16 15 29 34 31 11 1 20-2 28-8-5-15-15-27-30-34Z"/>
+      </svg>
+    </div>
+    <div class="hero-content reveal">
+      <div class="hero-monogram">E & V</div>
+      <div class="hero-kicker">Мы женимся</div>
+      <h1>Егор</h1>
+      <span class="hero-amp">&</span>
+      <h1>Виктория</h1>
+      <div class="hero-date">07 · 08 · 2027</div>
+      <div class="thin-rule"></div>
+      <p class="hero-copy">С огромной радостью приглашаем вас разделить с нами самый важный день нашей жизни — день рождения нашей семьи!</p>
+      <div class="hero-bottom">Будем счастливы видеть вас рядом</div>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- 4. Couple portrait -->
+  <section class="portrait-section">
+    <div class="eyebrow reveal">День, который мы запомним навсегда</div>
+    <div class="portrait-layout">
+      <div class="frame reveal">
+        <img class="portrait-img" src="assets/couple-portrait.jpg" alt="Чёрно-белая фотография Виктории и Егора" loading="lazy">
+      </div>
+      <div class="reveal">
+        <div class="portrait-caption">Наша маленькая вечность</div>
+        <p class="portrait-note">И нам очень хочется, чтобы в этот день рядом были самые близкие люди.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Calendar -->
+  <section class="section calendar-section">
+    <div class="eyebrow reveal">Пожалуйста, сохраните дату</div>
+    <h2 class="month-title reveal">Август 2027</h2>
+    <div class="calendar-grid reveal" aria-label="Календарь августа 2027 года">
+      <div class="calendar-cell weekday">Пн</div><div class="calendar-cell weekday">Вт</div><div class="calendar-cell weekday">Ср</div><div class="calendar-cell weekday">Чт</div><div class="calendar-cell weekday">Пт</div><div class="calendar-cell weekday">Сб</div><div class="calendar-cell weekday">Вс</div>
+      <div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell">1</div>
+      <div class="calendar-cell">2</div><div class="calendar-cell">3</div><div class="calendar-cell">4</div><div class="calendar-cell">5</div><div class="calendar-cell">6</div><div class="calendar-cell wedding-day">7</div><div class="calendar-cell">8</div>
+      <div class="calendar-cell">9</div><div class="calendar-cell">10</div><div class="calendar-cell">11</div><div class="calendar-cell">12</div><div class="calendar-cell">13</div><div class="calendar-cell">14</div><div class="calendar-cell">15</div>
+      <div class="calendar-cell">16</div><div class="calendar-cell">17</div><div class="calendar-cell">18</div><div class="calendar-cell">19</div><div class="calendar-cell">20</div><div class="calendar-cell">21</div><div class="calendar-cell">22</div>
+      <div class="calendar-cell">23</div><div class="calendar-cell">24</div><div class="calendar-cell">25</div><div class="calendar-cell">26</div><div class="calendar-cell">27</div><div class="calendar-cell">28</div><div class="calendar-cell">29</div>
+      <div class="calendar-cell">30</div><div class="calendar-cell">31</div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div><div class="calendar-cell empty"></div>
+    </div>
+    <div class="calendar-heart reveal">♡</div>
+    <p class="calendar-caption reveal">Суббота · 7 августа 2027 года</p>
+  </section>
+
+  <!-- 6. Animated S-curve programme -->
+  <section class="timeline-section" id="programme">
+    <div class="timeline-heading reveal">
+      <div class="eyebrow">План нашего дня</div>
+      <h2 class="section-title">Программа</h2>
+      <p class="timeline-intro">Проведём этот день вместе — от первых встреч до самых тёплых воспоминаний.</p>
+    </div>
+    <div class="timeline-track" id="timelineTrack">
+      <svg class="timeline-svg" viewBox="0 0 520 1470" preserveAspectRatio="none" aria-hidden="true">
+        <path class="timeline-path-bg" d="M120 20 C420 130 450 260 265 365 C65 480 55 640 265 740 C470 840 455 1010 260 1115 C65 1220 90 1350 395 1450"/>
+        <path class="timeline-path" id="timelinePath" pathLength="1" d="M120 20 C420 130 450 260 265 365 C65 480 55 640 265 740 C470 840 455 1010 260 1115 C65 1220 90 1350 395 1450"/>
+      </svg>
+      <div class="moving-heart" id="movingHeart" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#80513b" stroke="#f2dfc8" stroke-width="1">
+          <path d="M12 21s-8.5-5.2-8.5-11.1A4.7 4.7 0 0 1 12 7.4a4.7 4.7 0 0 1 8.5 2.5C20.5 15.8 12 21 12 21Z"/>
+        </svg>
+      </div>
+
+      <div class="event one reveal">
+        <div class="event-name">Сбор гостей</div>
+        <div class="time">15:30</div>
+        <div class="event-desc">Объятия, улыбки и первые фотографии</div>
+      </div>
+      <div class="event two reveal">
+        <div class="event-name">Начало церемонии</div>
+        <div class="time">16:00</div>
+        <div class="event-desc">Лёгкие угощения и самый трогательный момент нашего дня — выездная регистрация</div>
+      </div>
+      <img class="timeline-detail-photo reveal" src="assets/hands.jpg" alt="Руки Виктории и Егора" loading="lazy">
+      <div class="event three reveal">
+        <div class="event-name">Начало банкета</div>
+        <div class="time">17:00</div>
+        <div class="event-desc">Вкусный ужин, поздравления, музыка и танцы</div>
+      </div>
+      <div class="event four reveal">
+        <div class="event-name">Финал вечера</div>
+        <div class="time">22:30</div>
+        <div class="event-desc">Пусть этот вечер останется с нами в самых тёплых воспоминаниях</div>
+      </div>
+      <div class="timeline-end">До встречи! ♡</div>
+    </div>
+  </section>
+
+  <!-- 7. Venue, using all three generated images -->
+  <section class="venue-section">
+    <div class="eyebrow reveal">Место нашей встречи</div>
+    <h2 class="section-title reveal">Александрия</h2>
+    <p class="venue-lead reveal">Будем ждать вас в банкетном зале, где вместе отпразднуем начало нашей семейной истории.</p>
+    <div class="venue-main frame reveal">
+      <img src="assets/alexandria-main.jpg" alt="Банкетный зал Александрия — главный вид" loading="lazy">
+    </div>
+    <div class="venue-secondary">
+      <div class="frame reveal"><img src="assets/alexandria-detail.jpg" alt="Вход и подсветка банкетного зала Александрия" loading="lazy"></div>
+      <div class="frame reveal"><img src="assets/alexandria-evening.jpg" alt="Вечерний вид банкетного зала Александрия" loading="lazy"></div>
+    </div>
+    <div class="venue-caption reveal">Банкетный зал «Александрия»</div>
+    <p class="venue-address reveal">7 августа 2027 · начало сбора гостей в 15:30</p>
+    <a class="map-button reveal" href="https://yandex.ru/maps/-/CTUkeR6N" target="_blank" rel="noopener">
+      Как добраться <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+  <!-- 8. Sunset photo accent -->
+  <section class="sunset-section">
+    <img src="assets/sunset-couple.jpg" alt="Виктория и Егор вместе на закате" loading="lazy">
+    <div class="sunset-quote reveal">
+      <div class="script">До скорой встречи</div>
+      <p>С любовью и нетерпением ждём этот день</p>
+    </div>
+  </section>
+
+  <!-- 9. Dress code -->
+  <section class="dress-section">
+    <div class="eyebrow reveal">Будем рады поддержке нашей палитры</div>
+    <h2 class="section-title reveal">Dress code</h2>
+    <p class="dress-copy reveal">Нам будет особенно приятно, если вы выберете наряды в тёплых природных оттенках.</p>
+    <div class="swatches reveal" aria-label="Палитра дресс-кода">
+      <span class="swatch" style="background:#503126"></span>
+      <span class="swatch" style="background:#76513f"></span>
+      <span class="swatch" style="background:#98745e"></span>
+      <span class="swatch" style="background:#b99b82"></span>
+      <span class="swatch" style="background:#d7c1ac"></span>
+      <span class="swatch" style="background:#e9dccc"></span>
+    </div>
+    <div class="dress-note reveal">Просим оставить <strong>белые и молочные оттенки</strong> для невесты. Будем благодарны, если вы поддержите нашу коричнево-бежевую палитру.</div>
+  </section>
+
+  <!-- 10. Wishes -->
+  <section class="wishes-section">
+    <div class="wishes-card reveal">
+      <div class="eyebrow">Несколько слов о подарках</div>
+      <h2 class="section-title">Пожелания</h2>
+      <p>Ваше присутствие — уже самый ценный подарок для нас! Мы будем счастливы разделить этот особенный день с каждым из вас.</p>
+      <p>Если же вы захотите дополнить поздравление подарком, будем очень рады денежному вкладу в наше общее будущее, семейный уют и маленькие большие мечты.</p>
+      <p>А бутылочка хорошего вина станет прекрасным поводом устроить уютный вечер и ещё раз вспомнить этот замечательный день!</p>
+      <div class="last-line">Главное — ваше внимание, искренние улыбки и хорошее настроение!</div>
+    </div>
+  </section>
+
+  <!-- 11. Countdown -->
+  <section class="countdown-section">
+    <div class="eyebrow reveal">С нетерпением ждём</div>
+    <h2 class="section-title reveal">До нашей встречи</h2>
+    <p class="countdown-caption reveal">Осталось совсем немного времени до начала нашего праздника</p>
+    <div class="countdown reveal">
+      <div class="count-box"><strong id="days">—</strong><span>дней</span></div>
+      <div class="count-box"><strong id="hours">—</strong><span>часов</span></div>
+      <div class="count-box"><strong id="minutes">—</strong><span>минут</span></div>
+      <div class="count-box"><strong id="seconds">—</strong><span>секунд</span></div>
+    </div>
+    <div class="closing-script reveal">С любовью,</div>
+    <div class="closing-names reveal">Егор & Виктория</div>
+    <div class="closing-date reveal">07 · 08 · 2027</div>
+  </section>
+</main>
+
+<script>
+  // The envelope opens directly into the wedding invitation.
+  const cover = document.getElementById('cover');
+  const envelope = document.getElementById('envelope');
+  const waxButton = document.getElementById('waxButton');
+  const audio = document.getElementById('weddingAudio');
+  const musicButton = document.getElementById('musicButton');
+  let musicIsPlaying = false;
+
+  waxButton.addEventListener('click', async () => {
+    envelope.classList.add('open');
+
+    // Try to start the soundtrack from the guest's direct tap.
+    try {
+      await audio.play();
+      musicIsPlaying = true;
+      musicButton.classList.add('playing');
+      musicButton.setAttribute('aria-label','Выключить музыку');
+    } catch (e) {
+      // If playback is blocked, the music control remains available.
+    }
+
+    setTimeout(() => {
+      cover.classList.add('hide');
+      document.body.classList.remove('is-locked');
+      window.scrollTo({top:0,behavior:'instant'});
+    }, 950);
+  });
+
+  // Reveal elements softly as they enter the viewport.
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.13, rootMargin:'0px 0px -35px 0px'});
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+  // Draw the S-curve and move the heart along it as the programme section scrolls.
+  const track = document.getElementById('timelineTrack');
+  const path = document.getElementById('timelinePath');
+  const heart = document.getElementById('movingHeart');
+  const totalLength = path.getTotalLength();
+  path.style.strokeDasharray = '1';
+  path.style.strokeDashoffset = '1';
+
+  function updateTimeline() {
+    const rect = track.getBoundingClientRect();
+    const viewportAnchor = window.innerHeight * 0.72;
+    let progress = (viewportAnchor - rect.top) / rect.height;
+    progress = Math.max(0, Math.min(1, progress));
+    path.style.strokeDashoffset = String(1 - progress);
+    const point = path.getPointAtLength(totalLength * progress);
+    heart.style.left = (point.x / 520 * 100) + '%';
+    heart.style.top = point.y + 'px';
+  }
+  window.addEventListener('scroll', updateTimeline, {passive:true});
+  window.addEventListener('resize', updateTimeline);
+  updateTimeline();
+
+  // Countdown to the gathering of guests: 7 August 2027, 15:00 (device local time).
+  const weddingStart = new Date(2027, 7, 7, 15, 0, 0);
+  const countdownNodes = {
+    days: document.getElementById('days'),
+    hours: document.getElementById('hours'),
+    minutes: document.getElementById('minutes'),
+    seconds: document.getElementById('seconds')
+  };
+  const pad = (n) => String(n).padStart(2,'0');
+  function updateCountdown() {
+    let remaining = Math.max(0, weddingStart.getTime() - Date.now());
+    const days = Math.floor(remaining / 86400000); remaining %= 86400000;
+    const hours = Math.floor(remaining / 3600000); remaining %= 3600000;
+    const minutes = Math.floor(remaining / 60000); remaining %= 60000;
+    const seconds = Math.floor(remaining / 1000);
+    countdownNodes.days.textContent = days;
+    countdownNodes.hours.textContent = pad(hours);
+    countdownNodes.minutes.textContent = pad(minutes);
+    countdownNodes.seconds.textContent = pad(seconds);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
